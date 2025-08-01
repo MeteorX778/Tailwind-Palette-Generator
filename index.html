@@ -77,7 +77,7 @@
       <!-- CSS Variables Output -->
       <div class="bg-white rounded-lg shadow-md p-6 mt-8">
         <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-semibold text-gray-800">CSS Color Variables</h2>
+          <h2 class="text-xl font-semibold text-gray-800">Tailwind v4 (Paste into app/globals.css)</h2>
           <button id="copy-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors">
             Copy Code
           </button>
@@ -225,7 +225,8 @@
     
     // Generate CSS Variables
     function generateCSSVariables(palette) {
-      const config = `:root {
+      const config = `/* Paste this in app/globals.css */
+:root {
   --primary: ${palette[0]};
   --primary-light: ${palette[3]};
   --primary-dark: ${palette[4]};
@@ -298,3 +299,4 @@
   </script>
 </body>
 </html>
+
