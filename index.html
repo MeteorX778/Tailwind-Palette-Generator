@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tailwind Color Palette Generator</title>
+  <title>Tailwind Palette Generator</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
@@ -63,8 +63,7 @@
   <header class="py-8 px-4 text-center">
     <h1 class="text-4xl font-bold text-gray-800 mb-2">Tailwind Palette Generator</h1>
     <p class="text-gray-600 max-w-2xl mx-auto">
-      Press spacebar to generate new color palettes. When you find colors you like,
-      copy the Tailwind CSS configuration to use in your projects.
+      Press spacebar to generate new color palettes. When you find colors you like, copy the Tailwind CSS configuration to use in your projects.
     </p>
   </header>
 
@@ -75,10 +74,10 @@
         <!-- Color swatches will be injected here -->
       </div>
       
-      <!-- Tailwind Config Output -->
+      <!-- CSS Variables Output -->
       <div class="bg-white rounded-lg shadow-md p-6 mt-8">
         <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-semibold text-gray-800">Tailwind CSS Configuration</h2>
+          <h2 class="text-xl font-semibold text-gray-800">CSS Color Variables</h2>
           <button id="copy-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors">
             Copy Code
           </button>
@@ -94,7 +93,7 @@
 
   <!-- Toast Notification -->
   <div id="toast" class="fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-md shadow-lg hidden toast">
-    Copied to clipboard!
+    CSS variables copied to clipboard!
   </div>
 
   <script>
@@ -218,48 +217,55 @@
         colorCode.textContent = color;
         
         swatch.appendChild(colorCode);
-        
-        // Add lock button
-        const lockBtn = document.createElement('button');
-        lockBtn.className = 'bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-all self-end';
-        lockBtn.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-          </svg>
-        `;
-        
-        swatch.appendChild(lockBtn);
         paletteContainer.appendChild(swatch);
       });
       
-      generateTailwindConfig(palette);
+      generateCSSVariables(palette);
     }
     
-    // Generate Tailwind config
-    function generateTailwindConfig(palette) {
-      const config = `// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        primary: {
-          DEFAULT: '${palette[0]}',
-          light: '${palette[3]}',
-          dark: '${palette[4]}'
-        },
-        secondary: '${palette[1]}',
-        accent: '${palette[2]}',
-        custom: {
-          '50': '${palette[3]}',
-          '100': '${palette[0]}',
-          '200': '${palette[1]}',
-          '300': '${palette[2]}',
-          '400': '${palette[3]}',
-          '500': '${palette[4]}'
-        }
-      }
-    }
-  }
+    // Generate CSS Variables
+    function generateCSSVariables(palette) {
+      const config = `:root {
+  --primary: ${palette[0]};
+  --primary-light: ${palette[3]};
+  --primary-dark: ${palette[4]};
+  --secondary: ${palette[1]};
+  --accent: ${palette[2]};
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.129 0.042 264.695);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.129 0.042 264.695);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.129 0.042 264.695);
+  --muted: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.554 0.046 257.417);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.929 0.013 255.508);
+  --input: oklch(0.929 0.013 255.508);
+  --ring: oklch(0.704 0.04 256.788);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+}
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --muted: oklch(0.279 0.041 260.031);
+  --accent: oklch(0.279 0.041 260.031);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --sidebar: oklch(0.208 0.042 265.755);
 }`;
 
       configOutput.textContent = config;
@@ -292,4 +298,3 @@ module.exports = {
   </script>
 </body>
 </html>
-
